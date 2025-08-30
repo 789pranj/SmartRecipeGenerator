@@ -305,8 +305,6 @@ export const generateRecipeImage = async (req, res) => {
       return res.status(500).json({ message: "No image returned by AI" });
     }
 
-    // Save as data URI in DB (simple).
-    // Later you can upload to Cloudinary/S3 and just save the URL instead.
     const base64Url = `data:image/png;base64,${imageBase64}`;
     recipe.image = base64Url;
     await recipe.save();
