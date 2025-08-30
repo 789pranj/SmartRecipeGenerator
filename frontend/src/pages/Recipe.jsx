@@ -29,7 +29,8 @@ const Recipe = () => {
     const fetchRecipe = async () => {
       try {
         setLoading(true);
-        const res = await axios.get(`${baseUrl}/api/recipe/${id}`);
+        const res = await axios.get(`${baseUrl}/api/recipe/${id}`, { withCredentials: true }
+        );
         setRecipe(res.data.recipe);
         setFormData(res.data.recipe);
       } catch (err) {
@@ -59,7 +60,7 @@ const Recipe = () => {
 
   const handleUpdate = async () => {
     try {
-      const res = await axios.put(`${baseUrl}/api/recipe/${id}`, formData);
+      const res = await axios.put(`${baseUrl}/api/recipe/${id}`, formData, { withCredentials: true });
       setRecipe(res.data.recipe);
       setEditing(false);
     } catch (err) {
@@ -89,10 +90,10 @@ const Recipe = () => {
     try {
       setImgLoading(true);
       const res = await axios.put(
-      `${baseUrl}/api/recipe/${id}`,
-      formData,
-      { withCredentials: true }  
-    );
+        `${baseUrl}/api/recipe/${id}`,
+        formData,
+        { withCredentials: true }
+      );
       setRecipe(res.data.recipe); // update recipe with new image
     } catch (err) {
       setError(err.message || "Failed to generate image");
